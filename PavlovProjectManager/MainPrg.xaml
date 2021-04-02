@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PavlovProjectManager"
         mc:Ignorable="d"
-        Title="MainPrg" Height="450" Width="800" WindowState="Maximized">
+        Title="Pavlov Project Manager" Height="450" Width="800" WindowState="Maximized">
     <Grid>
-        
+        <ItemsControl ItemsSource="{Binding MyCollection}" Name="DirButtons">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding dirName}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

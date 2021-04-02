@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,21 @@ namespace PavlovProjectManager
         public MainPrg()
         {
             InitializeComponent();
+            
+
+            List<DirButton> button = new List<DirButton>();
+            foreach(string file in Directory.GetDirectories(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\PavlovProjects\\"))
+            {
+                button.Add(new DirButton() { dirName = file.Replace(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\PavlovProjects\\", "") });
+            }
+            
+
+            DirButtons.ItemsSource = button;
+        }
+
+        public class DirButton
+        {
+            public string dirName { get; set; }
         }
     }
 }

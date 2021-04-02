@@ -30,11 +30,25 @@ namespace PavlovProjectManager
         public string latestProj;
         public string currentProj;
         public bool adbinst;
+        public bool debugger = false;
 
         public MainWindow()
         {
+            if (debugger)
+            {
+                try
+                {
+                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\", true);
+                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects\\", true);
+                }
+                catch
+                {
+                    Console.WriteLine("poopoo");
+                }
+            }
             InitializeComponent();
             beginInit();
+            Close();
         }
 
         public void beginInit()
@@ -57,6 +71,10 @@ namespace PavlovProjectManager
             TryConnButton.Visibility = Visibility.Hidden;
             StartingStatus.Visibility = Visibility.Visible;
             StartingStatus.Text = "Beginning Initialization";
+            MainPrg prg = new MainPrg();
+            prg.Show();
+            
+
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\"))
             {
                 StartingStatus.Text = "Creating Master Directory";
@@ -210,8 +228,19 @@ namespace PavlovProjectManager
             {
                 StartingStatus.Text = "Unzipping project";
                 await Task.Run(() => ZipFile.ExtractToDirectory(mainPath + "\\baseproj\\base.zip", mainPath + "\\baseproj"));
-                StartingStatus.Text = "Project installed. Proceeding to main interface";
+                StartingStatus.Text = "Project installed. Setting up a couple more things and moving to the main interface!";
             }
+
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects"))
+            {
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects");
+            }
+
+            MainWindow main = new MainWindow();
+            main.Hide();
+            MainPrg prg = new MainPrg();
+            prg.Show();
+
         }
 
         public static bool checkConnect()
