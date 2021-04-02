@@ -5,14 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PavlovProjectManager"
         mc:Ignorable="d"
-        Title="Pavlov Project Manager" Height="450" Width="800" WindowState="Maximized">
+        Title="Pavlov Project Manager" Height="564" Width="460" WindowState="Normal" ResizeMode="CanMinimize">
     <Grid>
-        <ItemsControl ItemsSource="{Binding MyCollection}" Name="DirButtons">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Content="{Binding dirName}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Margin="0,0,230,0">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding MyCollection}" Name="DirButtons" Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,5">
+                                <Button Content="{Binding dirName}" Click="Button_Click"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Window>

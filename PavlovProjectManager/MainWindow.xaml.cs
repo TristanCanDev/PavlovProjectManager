@@ -48,7 +48,6 @@ namespace PavlovProjectManager
             }
             InitializeComponent();
             beginInit();
-            Close();
         }
 
         public void beginInit()
@@ -60,7 +59,22 @@ namespace PavlovProjectManager
             }
             else if (checkConnect())
             {
-                Init();
+                try
+                {
+                    foreach (string line in File.ReadAllLines(mainPath + "\\config.txt"))
+                    {
+                        if (line.Contains("initialized=True"))
+                        {
+                            MainPrg prg = new MainPrg();
+                            prg.Show();
+                            Close();
+                        }
+                    }
+                }
+                catch
+                {
+                    Init();
+                }
             }
         }
         string mainPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\PavlovHandler";
@@ -71,8 +85,7 @@ namespace PavlovProjectManager
             TryConnButton.Visibility = Visibility.Hidden;
             StartingStatus.Visibility = Visibility.Visible;
             StartingStatus.Text = "Beginning Initialization";
-            MainPrg prg = new MainPrg();
-            prg.Show();
+            
             
 
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\"))
@@ -92,7 +105,7 @@ namespace PavlovProjectManager
                 string[] Configuration =
                 {
                     "initialized=True"
-                    };
+                };
                 File.WriteAllLinesAsync(mainPath + "\\config.txt", Configuration);
                 StartingStatus.Text = "Config set up, Checking ADB";
             }
@@ -229,18 +242,16 @@ namespace PavlovProjectManager
                 StartingStatus.Text = "Unzipping project";
                 await Task.Run(() => ZipFile.ExtractToDirectory(mainPath + "\\baseproj\\base.zip", mainPath + "\\baseproj"));
                 StartingStatus.Text = "Project installed. Setting up a couple more things and moving to the main interface!";
+
+                MainPrg prg = new();
+                Close();
+                prg.Show();
             }
 
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects"))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects");
             }
-
-            MainWindow main = new MainWindow();
-            main.Hide();
-            MainPrg prg = new MainPrg();
-            prg.Show();
-
         }
 
         public static bool checkConnect()
