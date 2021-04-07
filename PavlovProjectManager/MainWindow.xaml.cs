@@ -73,6 +73,7 @@ namespace PavlovProjectManager
                 }
                 catch
                 {
+                    CheckThings();
                     Init();
                     RegistryFunctions reg = new();
                     reg.init();
