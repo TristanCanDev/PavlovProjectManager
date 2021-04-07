@@ -1,0 +1,15 @@
+﻿<Window x:Class="PavlovProjectManager.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PavlovProjectManager"
+        mc:Ignorable="d"
+        Title="Settings" Height="216" Width="577" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBlock x:Name="Destination" HorizontalAlignment="Left" Margin="25,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="58" Width="523" Text="destination" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" FontSize="18" Height="21"><Run Text="Current UE Editor Destination"/><LineBreak/><Run/></TextBlock>
+        <Button Content="Locate" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Width="86" Height="34" Click="Button_Click" FontSize="18"/>
+
+    </Grid>
+</Window>

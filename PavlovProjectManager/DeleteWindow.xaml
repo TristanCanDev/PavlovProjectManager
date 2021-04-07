@@ -1,0 +1,25 @@
+﻿<Window x:Class="PavlovProjectManager.DeleteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PavlovProjectManager"
+        mc:Ignorable="d"
+        Title="Delete Projects" Height="450" Width="309">
+    <Grid>
+        <Grid Margin="0,0,0,71">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding MyCollection}" Name="DirButtons" Margin="0,0,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,5">
+                                <Button Content="{Binding dirName}" Click="Button_Click"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Button Content="Done&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,368,0,0" VerticalAlignment="Top" Height="43" Width="151" FontSize="24" Click="Button_Click_1"/>
+    </Grid>
+</Window>

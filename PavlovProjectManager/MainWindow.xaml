@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="/pavlov-vr.png" Stretch="Fill"/>
     </Window.Background>
     <Grid>
-        <TextBlock x:Name="NoConnectMsg" HorizontalAlignment="Center" Text="No Internet! Please connect and hit 'Try Again'" TextWrapping="Wrap" VerticalAlignment="Center" Height="103" Width="572" FontSize="36" TextAlignment="Center" IsEnabled="False" Visibility="Hidden"/>
+        <TextBlock x:Name="NoConnectMsg" HorizontalAlignment="Center" Text="No Internet! Please connect and hit 'Try Again'" TextWrapping="Wrap" VerticalAlignment="Center" Height="103" Width="572" FontSize="36" TextAlignment="Center" IsEnabled="False" Visibility="Hidden" Foreground="White"/>
         <Button x:Name="TryConnButton" Content="Try Again" HorizontalAlignment="Center" Margin="0,296,0,0" VerticalAlignment="Top" Height="34" Width="122" FontSize="16" Click="Button_Click" Visibility="Hidden"/>
         <TextBlock x:Name="StartingStatus" HorizontalAlignment="Center" Margin="0,376,0,0" Text="Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="780" FontSize="18" TextAlignment="Center" Foreground="#FF9AFF9C"/>
 

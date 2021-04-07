@@ -38,7 +38,7 @@ namespace PavlovProjectManager
             {
                 try
                 {
-                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\", true);
+                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\", true);
                     Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects\\", true);
                 }
                 catch
@@ -74,10 +74,12 @@ namespace PavlovProjectManager
                 catch
                 {
                     Init();
+                    RegistryFunctions reg = new();
+                    reg.init();
                 }
             }
         }
-        string mainPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\PavlovHandler";
+        string mainPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\PavlovHandler";
         public void Init()
         {
             // Will initialize things such as ADB and making sure the project is downloaded etc etc
@@ -88,16 +90,16 @@ namespace PavlovProjectManager
             
             
 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\"))
             {
                 StartingStatus.Text = "Creating Master Directory";
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\");
             }
 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\PavlovHandler"))
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\PavlovHandler"))
             {
                 StartingStatus.Text = "Creating Sub Directory";
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\BluSoft\\PavlovHandler");
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\PavlovHandler");
             }
             if (!File.Exists(mainPath + "\\config.txt"))
             {

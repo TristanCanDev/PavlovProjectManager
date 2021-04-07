@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Pavlov Project Manager" Height="564" Width="460" WindowState="Normal" ResizeMode="CanMinimize">
     <Grid>
-        <Grid Margin="0,0,230,0">
+        <Grid Margin="0,70,230,0" Background="LightGray">
             <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding MyCollection}" Name="DirButtons" Margin="0,0,0,0">
                     <ItemsControl.ItemTemplate>
@@ -20,5 +20,16 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="50,26,0,0" Text="Projects" TextWrapping="Wrap" VerticalAlignment="Top" Height="39" Width="130" FontSize="24" TextAlignment="Center"/>
+        <Button x:Name="RefYes" Content="Refresh" HorizontalAlignment="Left" Margin="306,160,0,0" VerticalAlignment="Top" Height="40" Width="78" FontSize="18" BorderBrush="White" Click="RefreshProj" Visibility="Visible"/>
+        <TextBlock x:Name="Welcome" HorizontalAlignment="Left" Margin="267,70,0,0" Text="Welcome To The Pavlov Project Manager!" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" TextAlignment="Center" FontSize="18" Visibility="Visible"/>
+        <Button x:Name="New" Content="New" HorizontalAlignment="Left" Margin="306,223,0,0" VerticalAlignment="Top" Height="41" Width="78" FontSize="18" Click="Button_Click_1" Visibility="Visible" BorderBrush="White"/>
+        <TextBox x:Name="FileName" HorizontalAlignment="Left" Margin="236,75,0,0" Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="190" TextAlignment="Center" Height="36" FontSize="20" Visibility="Hidden"/>
+        <Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="289,133,0,0" VerticalAlignment="Top" Height="45" Width="83" Visibility="Hidden" Click="Create_Click" FontSize="18"/>
+        <TextBlock x:Name="StatusBock" HorizontalAlignment="Left" Margin="222,111,0,0" Text="Status" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="218" TextAlignment="Center" Visibility="Hidden"/>
+        <Button x:Name="Push" Content="Push Map" HorizontalAlignment="Left" Margin="300,358,0,0" VerticalAlignment="Top" Height="44" Width="92" FontSize="18" BorderBrush="White" Visibility="Visible" IsEnabled="False"/>
+        <Button x:Name="delete" Content="Delete" HorizontalAlignment="Left" Margin="306,287,0,0" VerticalAlignment="Top" Height="45" Width="78" FontSize="18" Click="Button_Click_2" Visibility="Visible" BorderBrush="White"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="289,200,0,0" VerticalAlignment="Top" Width="83" Height="44" FontSize="18" Click="Button_Click_3" Visibility="Hidden"/>
+        <Button x:Name="settings" Content="Settings" HorizontalAlignment="Left" Margin="307,420,0,70" Width="78" FontSize="18" BorderBrush="White" Click="Button_Click_4"/>
     </Grid>
 </Window>

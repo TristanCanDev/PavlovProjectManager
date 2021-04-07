@@ -5,6 +5,10 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Authors>Tristan Bouchard (Blu)</Authors>
+    <Company>BluSoft</Company>
+    <Copyright>BluSoft, All rights reserved</Copyright>
+    <ApplicationIcon>pavlovthinglogo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
