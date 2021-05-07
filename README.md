@@ -26,4 +26,4 @@ To fix this issue, you can hit the settings button and change the path to wherev
 ## How do I uninstall?
 On windows, you can hit the search bar and search 'Pavlov Project Manager' and hit uninstall.
 
-### If you have any other questions, please contact [blu#3227](https://discord.com)
+### If you have any other questions, please contact [blu#3227](https://discordapp.com/users/501597235927187457)
