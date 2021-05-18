@@ -38,8 +38,8 @@ namespace PavlovProjectManager
             {
                 try
                 {
-                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\", true);
-                    Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects\\", true);
+                    Directory.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\BluSoft\\", true);
+                    Directory.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PavlovProjects\\", true);
                 }
                 catch
                 {
@@ -61,7 +61,7 @@ namespace PavlovProjectManager
             {
                 try
                 {
-                    foreach (string line in File.ReadAllLines(mainPath + "\\config.txt"))
+                    foreach (string line in File.ReadAllLines($"{mainPath}\\config.txt"))
                     {
                         if (line.Contains("initialized=True"))
                         {
@@ -80,7 +80,7 @@ namespace PavlovProjectManager
                 }
             }
         }
-        string mainPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\PavlovHandler";
+        string mainPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\BluSoft\\PavlovHandler";
         public void Init()
         {
             // Will initialize things such as ADB and making sure the project is downloaded etc etc
@@ -88,45 +88,45 @@ namespace PavlovProjectManager
             TryConnButton.Visibility = Visibility.Hidden;
             StartingStatus.Visibility = Visibility.Visible;
             StartingStatus.Text = "Beginning Initialization";
-            
-            
 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\"))
+
+
+            if (!Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\BluSoft\\"))
             {
                 StartingStatus.Text = "Creating Master Directory";
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\");
+                Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\BluSoft\\");
             }
 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\PavlovHandler"))
+            if (!Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\BluSoft\\PavlovHandler"))
             {
                 StartingStatus.Text = "Creating Sub Directory";
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\BluSoft\\PavlovHandler");
+                Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\BluSoft\\PavlovHandler");
             }
-            if (!File.Exists(mainPath + "\\config.txt"))
+            if (!File.Exists($"{mainPath}\\config.txt"))
             {
                 StartingStatus.Text = "Setting up config.txt";
                 string[] Configuration =
                 {
                     "initialized=True"
                 };
-                File.WriteAllLinesAsync(mainPath + "\\config.txt", Configuration);
+                File.WriteAllLinesAsync($"{mainPath}\\config.txt", Configuration);
                 StartingStatus.Text = "Config set up, Checking ADB";
             }
-            if (!Directory.Exists(mainPath + "\\adb\\"))
+            if (!Directory.Exists($"{mainPath}\\adb\\"))
             {
-                Directory.CreateDirectory(mainPath + "\\adb\\");
+                Directory.CreateDirectory($"{mainPath}\\adb\\");
                 StartingStatus.Text = "Created adb directory";
             }
-            if (File.Exists(mainPath + "\\adb\\zippedADB.zip"))
+            if (File.Exists($"{mainPath}\\adb\\zippedADB.zip"))
             {
-                File.Delete(mainPath + "\\adb\\zippedADB.zip");
+                File.Delete($"{mainPath}\\adb\\zippedADB.zip");
             }
-            if(Directory.Exists(mainPath + "\\adb\\latest\\"))
+            if(Directory.Exists($"{mainPath}\\adb\\latest\\"))
             {
-                Directory.Delete(mainPath + "\\adb\\latest\\", true);
+                Directory.Delete($"{mainPath}\\adb\\latest\\", true);
             }
 
-            string[] temp = File.ReadAllLines(mainPath + "\\config.txt");
+            string[] temp = File.ReadAllLines($"{mainPath}\\config.txt");
             foreach(string line in temp)
             {
                 if (line.Contains("adbinst="))
@@ -144,32 +144,32 @@ namespace PavlovProjectManager
                 WebClient adbdown = new WebClient();
                 Uri adburl = new Uri("https://dl.google.com/android/repository/platform-tools-latest-windows.zip");
 
-                adbdown.DownloadFileAsync(adburl, mainPath + "\\adb\\zippedADB.zip");
+                adbdown.DownloadFileAsync(adburl, $"{mainPath}\\adb\\zippedADB.zip");
                 adbdown.DownloadProgressChanged += new DownloadProgressChangedEventHandler(progress);
                 adbdown.DownloadFileCompleted += new AsyncCompletedEventHandler(extract);
                 void progress(object sender, DownloadProgressChangedEventArgs a)
                 {
-                    StartingStatus.Text = "Downloading ADB. " + a.BytesReceived + " out of " + a.TotalBytesToReceive + " bytes downloaded";
+                    StartingStatus.Text = $"Downloading ADB. {a.BytesReceived} out of {a.TotalBytesToReceive} bytes downloaded";
                 }
                 async void extract(object sender, AsyncCompletedEventArgs a)
                 {
                     StartingStatus.Text = "Completed ADB download. Extracting";
-                    await Task.Run(() => ZipFile.ExtractToDirectory(mainPath + "\\adb\\zippedADB.zip", mainPath + "\\adb\\latest\\"));
+                    await Task.Run(() => ZipFile.ExtractToDirectory($"{mainPath}\\adb\\zippedADB.zip", $"{mainPath}\\adb\\latest\\"));
                     StartingStatus.Text = "File Unzipped! Installing the pavlov project if it hasn't been installed!";
                     string[] temp =
                     {
                         "adbinst=True"
                     };
 
-                    File.AppendAllLines(mainPath + "\\config.txt", temp);
+                    File.AppendAllLines($"{mainPath}\\config.txt", temp);
 
                     CheckThings();
                 }
             }
 
-            if (!Directory.Exists(mainPath + "\\baseproj"))
+            if (!Directory.Exists($"{mainPath}\\baseproj"))
             {
-                Directory.CreateDirectory(mainPath + "\\baseproj");
+                Directory.CreateDirectory($"{mainPath}\\baseproj");
             }
 
         }
@@ -190,6 +190,7 @@ namespace PavlovProjectManager
                         dynamic commits = JArray.Parse(json);
                         string lastCommit = commits[0].commit.message;
                         latestProj = lastCommit.Replace("\n","");
+                        latestProj = latestProj.Trim();
                     }
                 }
 
@@ -214,14 +215,15 @@ namespace PavlovProjectManager
                         dynamic commits = JArray.Parse(json);
                         string lastCommit = commits[0].commit.message;
                         latestProj = lastCommit.Replace("\n","");
+                        latestProj = latestProj.Trim();
                     }
                 }
                 currentProj = latestProj;
                 string[] temp1 =
                 {
-                    "latestProj=" + currentProj
+                    $"latestProj={currentProj}"
                 };
-                File.AppendAllLines(mainPath + "\\config.txt", temp1);
+                File.AppendAllLines($"{mainPath}\\config.txt", temp1);
                 InstallProj();
             }
         }
@@ -233,17 +235,17 @@ namespace PavlovProjectManager
 
             projDown.DownloadProgressChanged += new DownloadProgressChangedEventHandler(progress);
             projDown.DownloadFileCompleted += new AsyncCompletedEventHandler(extract);
-            projDown.DownloadFileAsync(projurl, mainPath + "\\baseproj\\base.zip");
+            projDown.DownloadFileAsync(projurl, $"{mainPath}\\baseproj\\base.zip");
 
             async void progress(object sender, DownloadProgressChangedEventArgs a)
             {
-                StartingStatus.Text = "Installing project file. " + a.BytesReceived + " out of " + a.TotalBytesToReceive + " bytes recieved";
+                StartingStatus.Text = $"Installing project file. {a.BytesReceived} out of {a.TotalBytesToReceive} bytes recieved";
             }
 
             async void extract(object sender, AsyncCompletedEventArgs a)
             {
                 StartingStatus.Text = "Unzipping project";
-                await Task.Run(() => ZipFile.ExtractToDirectory(mainPath + "\\baseproj\\base.zip", mainPath + "\\baseproj"));
+                await Task.Run(() => ZipFile.ExtractToDirectory($"{mainPath}\\baseproj\\base.zip", $"{mainPath}\\baseproj"));
                 StartingStatus.Text = "Project installed. Setting up a couple more things and moving to the main interface!";
 
                 MainPrg prg = new();
@@ -251,9 +253,9 @@ namespace PavlovProjectManager
                 prg.Show();
             }
 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects"))
+            if (!Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PavlovProjects"))
             {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\PavlovProjects");
+                Directory.CreateDirectory($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\PavlovProjects");
             }
         }
 

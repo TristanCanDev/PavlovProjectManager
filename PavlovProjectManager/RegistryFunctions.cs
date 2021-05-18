@@ -13,7 +13,7 @@ namespace PavlovProjectManager
         {
             RegistryKey key = Registry.CurrentUser.CreateSubKey(@"SOFTWARE\PavlovManager");
 
-            key.SetValue("UEPATH", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "\\Epic Games\\UE_4.21\\Engine\\Binaries\\Win64\\UE4Editor.exe");
+            key.SetValue("UEPATH", $"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}\\Epic Games\\UE_4.21\\Engine\\Binaries\\Win64\\UE4Editor.exe");
             key.Close();
         }
 
